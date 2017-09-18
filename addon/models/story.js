@@ -5,6 +5,7 @@ import get, { getProperties } from 'ember-metal/get';
 import computed from 'ember-computed';
 import { producingOrgs } from 'nypr-publisher-lib/helpers/producing-orgs';
 const { attr, Model } = DS;
+import moment from 'moment';
 
 export default Model.extend({
   // BEGIN-SNIPPET story-fields
@@ -42,6 +43,7 @@ export default Model.extend({
   podcastLinks: attr(),
   producingOrganizations: attr(),
   publishAt: attr('string'),
+  publishStatus: attr('string'),
   segments: attr(),
   series: attr(),
   show: attr('string'),
@@ -70,6 +72,8 @@ export default Model.extend({
     let imageDisplayFlag = get(this, 'imageMain.isDisplay');
     if (["story_video", "story_interactive", "story_noimage"].includes(template)) {
       return false;
+    } else if (template === 'story_archives'){
+      return true;
     } else if (imageWidth >= 800 && imageDisplayFlag === true){
       return true;
     }
@@ -85,6 +89,15 @@ export default Model.extend({
       }
       return body.replace(/\\x3C\/script>/g, '</script>');
     }
+  }),
+  futureArticle: computed('publishStatus','publishAt', function(){
+    let publishStatus = this.get('publishStatus');
+    let publishAt = this.get('publishAt');
+    let currentDate = moment();
+    if ((publishStatus === 'draft') || (publishStatus === 'published' && currentDate.isBefore(publishAt)) ){
+      return true;
+    }
+    return false;
   }),
   pageChunks: computed('chunks', function(){
     //process the raw chunks into django-page records, if they are present
