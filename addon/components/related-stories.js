@@ -4,15 +4,18 @@ import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 
 export default Ember.Component.extend({
+  tagName: 'section',
   layout,
-  classNames: ['list', 'list--noborder'],
-  pathname: document.location.pathname,
+  classNames: ['related-stories'],
 
   stories: Ember.computed('getStories', {
     get() {
       get(this, 'getStories')().then(stories => {
         set(this, 'stories', stories);
-        Ember.run.scheduleOnce('afterRender', this, this.imagesLoaded);
+        // TODO: make this an app concern
+        if (this.$().imagesLoaded) {
+          Ember.run.scheduleOnce('afterRender', this, this.imagesLoaded);
+        }
       });
     },
     set(k,v) { return v; }
