@@ -5505,7 +5505,7 @@ number-is-nan@^1.0.0:
 
 nypr-audio-services@nypublicradio/nypr-audio-services#demo:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/9f4cceaf393d91443bf27cd6a3f5bd69418eb10b"
+  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/be972a43fa96eff4451849fb777c0b373507561f"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -5535,8 +5535,6 @@ nypr-metrics@nypublicradio/nypr-metrics#demo:
     ember-cli-babel "^6.0.0"
     ember-cli-htmlbars "^1.1.1"
     ember-cli-htmlbars-inline-precompile "^0.4.0"
-    ember-get-config "^0.2.2"
-    ember-metrics "^0.12.1"
 
 nypr-ui@nypublicradio/nypr-ui#demo:
   version "0.0.0"
